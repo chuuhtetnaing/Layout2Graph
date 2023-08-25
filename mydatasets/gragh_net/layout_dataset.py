@@ -34,7 +34,7 @@ class GraphLayoutDataset(Dataset):
                                               data_root[i]).replace('/graph_labels/',
                                                                     '/ocr_results_images/').replace('.json', '.jpg')
                 if not os.path.exists(img_path):
-                    img_path = img_path.replace('/ocr_results_images/', '/images/')
+                    img_path = img_path.replace('/ocr_results_images/', '/PNG/')
                 if not os.path.exists(img_path):
                     img_path = img_path.replace('.jpg', '.png')
                 if not os.path.exists(img_path):
