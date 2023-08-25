@@ -1,7 +1,7 @@
 base: config/graph_net/train_layout_graph.yaml
 model:
   model_path: # put the path to your models here
-  class_list: ['Text', 'Title', 'Picture', 'Table', 'List-item', 'Page-header', 'Page-footer', 'Section-header', 'Footnote','Caption','Formula']
+  class_list: ['text', 'title', 'figure', 'table', 'list']
   class_map: {}
 trainer:
   grad_clip: 5
@@ -26,14 +26,14 @@ datasets:
   train:
     dataset:
       data_root:
-        - dataset/doclaynet
+        - dataset/publaynet
       label_root:
-        - dataset/doclaynet/preprocess/train
+        - dataset/publaynet/preprocess/train
     collate_fn:
       aug_flag: false
   eval:
     dataset:
       data_root:
-        - dataset/doclaynet
+        - dataset/publaynet
       label_root:
-        - dataset/doclaynet/preprocess/val
+        - dataset/publaynet/preprocess/val

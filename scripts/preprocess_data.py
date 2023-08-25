@@ -36,14 +36,14 @@ class TestGenerator(unittest.TestCase):
 
     def test_convert_DocLayNet2Graph(self):
         # specify the PNG/COCO/JSON dir
-        image_dir = 'dataset/doclaynet/PNG'
-        label_dir = 'dataset/doclaynet/COCO'
-        ocr_dir = 'dataset/doclaynet/JSON'
+        image_dir = 'dataset/publaynet/PNG'
+        label_dir = 'dataset/publaynet/COCO'
+        ocr_dir = 'dataset/publaynet/JSON'
 
         # output config
-        debug_dir = 'dataset/doclaynet/debug'
-        out_dir = 'dataset/doclaynet/preprocess'
-        log_file = open('dataset/doclaynet/error_DocLayNet_core.txt', 'a+')
+        debug_dir = 'dataset/publaynet/debug'
+        out_dir = 'dataset/publaynet/preprocess'
+        log_file = open('dataset/publaynet/error_DocLayNet_core.txt', 'a+')
 
         label_path_list = get_file_path_list(label_dir, ['json'])
         for label_path in label_path_list:
@@ -128,7 +128,7 @@ class TestGenerator(unittest.TestCase):
                             for label_data in label_list:
                                 label_index = label_data['category_id']
                                 label = categories[label_index - 1]['name']
-                                label = self.doclaynet_label_list.index(label)
+                                label = self.publaynet_label_list.index(label)
                                 label_bbox = [
                                     label_data['bbox'][0], label_data['bbox'][1],
                                     label_data['bbox'][0] + label_data['bbox'][2],
