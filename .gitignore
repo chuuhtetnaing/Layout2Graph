@@ -98,4 +98,6 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
-
+.idea
+__pycache__
+dataset
