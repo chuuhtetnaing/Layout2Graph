@@ -26,14 +26,14 @@ datasets:
   train:
     dataset:
       data_root:
-        - /open-dataset/OD-layout/DocLayNet_core
+        - dataset/doclaynet
       label_root:
-        - /open-dataset/OD-layout/DocLayNet_core_graph_labels/train
+        - dataset/doclaynet/preprocess/train
     collate_fn:
       aug_flag: false
   eval:
     dataset:
       data_root:
-        - /open-dataset/OD-layout/DocLayNet_core
+        - dataset/doclaynet
       label_root:
-        - /open-dataset/OD-layout/DocLayNet_core_graph_labels/val
+        - dataset/doclaynet/preprocess/val
