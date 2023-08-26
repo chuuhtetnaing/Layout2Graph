@@ -27,6 +27,7 @@ from metrics import get_metric
 from metrics.meter import AverageMeter
 from mydatasets import get_dataset
 from networks import get_network
+import wandb
 
 
 class BaseExperiment(object):
@@ -116,6 +117,7 @@ class BaseExperiment(object):
                         norm_meter.update(grad_norm)
                         if not self.args.trainer.scheduler_by_epoch:
                             self._step_scheduler(global_step)
+                wandb.log({"loss": result['loss'].item()})
                 loss_meter.update(result['loss'].item(), self.args.datasets.train.batch_size)
                 batch_time.update(time.time() - start)
                 global_step += 1

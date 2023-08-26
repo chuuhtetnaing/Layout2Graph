@@ -13,6 +13,10 @@ import experiment
 # torch.multiprocessing.set_sharing_strategy('file_system')
 from base.common_util import get_absolute_file_path, init_experiment_config
 from experiment import get_experiment_name
+import wandb
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 def init_args():
@@ -59,9 +63,15 @@ def main(args):
         experiment_instance.evaluate()
 
 
+def init_wandb():
+    wandb.login(key=os.getenv("WANDB_API_KEY"))
+    wandb.init(project="Layout2Graph")
+
+
 if __name__ == '__main__':
     args = init_args()
     setproctitle.setproctitle("{} task for {}".format(args.experiment_name, args.config_file.split('/')[-1]))
+    init_wandb()
     main(args)
 
 
