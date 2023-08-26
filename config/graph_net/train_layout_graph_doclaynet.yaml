@@ -1,6 +1,6 @@
 base: config/graph_net/train_layout_graph.yaml
 model:
-  model_path: # put the path to your models here
+  model_path:
   class_list: ['text', 'title', 'figure', 'table', 'list']
   class_map: {}
 trainer:
@@ -22,6 +22,8 @@ trainer:
     warmup_epochs: 1
   save_dir: doclaynet/
   tensorboard_dir: doclaynet/tensorboard/
+  resume_flag: true
+  save_best: true
 datasets:
   train:
     dataset:
@@ -29,6 +31,8 @@ datasets:
         - dataset/publaynet
       label_root:
         - dataset/publaynet/preprocess/train
+    num_workers: 6
+    batch_size: 2
     collate_fn:
       aug_flag: false
   eval:

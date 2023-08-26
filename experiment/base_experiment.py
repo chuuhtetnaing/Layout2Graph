@@ -16,11 +16,11 @@ from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 
 import mydatasets
-from base.common_util import get_absolute_file_path, merge_config, get_file_path_list
-from base.common_util import save_params
-from base.driver import log_formatter
-from base.driver import logger
-from base.torch_utils.dl_util import get_optimizer, get_scheduler, get_scheduler2, seed_all, get_grad_norm
+from base.common_util import (get_absolute_file_path, get_file_path_list,
+                              merge_config, save_params)
+from base.driver import log_formatter, logger
+from base.torch_utils.dl_util import (get_grad_norm, get_optimizer,
+                                      get_scheduler, get_scheduler2, seed_all)
 from base.torch_utils.torch_util import ModelEMA
 from loss import get_criterion
 from metrics import get_metric
@@ -96,7 +96,7 @@ class BaseExperiment(object):
         global_step = self.args.trainer.start_epoch * len(self.train_data_loader)
         global_eval_step = 0
         ni = 0
-        self.evaluate(simple_eval_flag=True)  # ADD 在开始训练的时候，先eval一下；防止因为eval写错了，导致之前train的时间都白费了
+        # self.evaluate(simple_eval_flag=True)  # ADD 在开始训练的时候，先eval一下；防止因为eval写错了，导致之前train的时间都白费了
         for epoch in range(self.args.trainer.start_epoch, self.args.trainer.epochs):
             self.model.zero_grad(set_to_none=True)
             for i, batch in enumerate(self.train_data_loader):

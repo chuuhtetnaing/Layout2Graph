@@ -14,13 +14,16 @@ import torch
 from PIL import Image
 from tqdm import tqdm
 
-from base.branch_utils.gragh_net_utils.label_converter import TableGraphLabelConverter
+from base.branch_utils.gragh_net_utils.label_converter import \
+    TableGraphLabelConverter
 from base.branch_utils.gragh_net_utils.visualize_table import visualize_img
 from base.common_util import get_file_path_list
 from base.driver import logger
 from experiment.base_experiment import BaseExperiment
 from metrics.meter import AverageMeter
-from mydatasets.gragh_net.graph_collate import graph_get_pad_transform, variety_cell, graph_get_resize_transform
+from mydatasets.gragh_net.graph_collate import (graph_get_pad_transform,
+                                                graph_get_resize_transform,
+                                                variety_cell)
 from post_process import get_post_processor
 
 
@@ -295,10 +298,11 @@ class GraphLayoutExperiment(BaseExperiment):
             message = "experiment:{}; eval, (epoch: {}, steps: {});".format(self.experiment_name, epoch, global_step)
             logger.info(message)
             result = self.evaluate(global_eval_step=global_eval_step)
+            logger.info(f"Evaluation result: {result}, Noe")
             global_eval_step = result['global_eval_step']
             Node_F1_MICRO, Pair_F1_MACRO = result['acc']
             if (not self.args.trainer.save_best or (self.args.trainer.save_best
-                                                    and Pair_F1_MACRO > self.args.trainer.best_eval_result)) and self.args.device.is_master:
+                                                    and Pair_F1_MACRO > self.args.trainer.best_eval_result[1])) and self.args.device.is_master:
                 checkpoint_name = "{}_epoch{}_step{}_lr{:e}_average_loss{:.5f}_NodeF1MICRO{:.5f}_PairF1MACRO{:.5f}.pth".format(
                     self.experiment_name, epoch, global_step, current_lr, loss_meter.avg, Node_F1_MICRO, Pair_F1_MACRO)
                 checkpoint_path = os.path.join(self.args.trainer.save_dir, checkpoint_name)

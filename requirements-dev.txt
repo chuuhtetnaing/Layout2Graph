@@ -13,4 +13,5 @@ tensorboard
 transformers
 torch-geometric
 Werkzeug==2.0.3
--r requirements/requirements-dependency-2.0.1.txt
+opencv-python-headless
+timm
